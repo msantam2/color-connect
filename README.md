@@ -27,7 +27,7 @@ In addition, this project will include:
 
 Color Connect will consist of a simple UI. The dominant component will be the board (grid) in the middle of the screen, which will be symmetric (i.e. NxN). This board will contain generated pairs of colors in scattered positions. There will be an About button near the board that, upon clicking, creates a modal that outlines the rules of the game.
 
-![wireframes](https://drive.google.com/open?id=0BzqiXYhU-5YucU1odzNCV2hLTFk)
+![wireframes]()
 
 ### Architecture and Technologies
 
