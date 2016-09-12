@@ -25,7 +25,8 @@ In addition, this project will include:
 
 ### Wireframes
 
-Color Connect will consist of a simple UI. The dominant component will be the board (grid) in the middle of the screen, which will be symmetric (i.e. NxN). This board will contain generated pairs of colors in scattered positions. There will be an About button near the board that, upon clicking, creates a modal that outlines the rules of the game.
+Color Connect will consist of a simple UI. The dominant component will be the board (grid) in the middle of the screen, which will be symmetric (i.e. NxN). This board will contain generated pairs of colors in scattered positions. There will be an About button near the board that, upon clicking, renders a modal that outlines the rules of the game. The Level will be clearly displayed on top of the board, with an adjacent button option to reset the board.
+At the footer of the UI will be links to GitHub and LinkedIn.
 
 ![wireframes]()
 
