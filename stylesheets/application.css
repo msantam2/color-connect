@@ -5,6 +5,20 @@ body {
   align-items: center;
 }
 
+button {
+  outline: none;
+}
+
+button:hover {
+  -webkit-filter: brightness(85%);
+  cursor: pointer;
+}
+
+button:active {
+  position: relative;
+  top: 2px;
+}
+
 .game-title {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -20,6 +34,7 @@ body {
   font-size: 70px;
   font-family: 'Bungee', cursive;
   text-align: center;
+  margin-top: 15px;
 }
 
 .row {
@@ -28,6 +43,7 @@ body {
 }
 
 .tile {
+  cursor: pointer; 
   width: 60px;
   height: 60px;
   border: 1px solid white;
@@ -42,24 +58,13 @@ body {
   border-radius: 50%;
 }
 
-.red {
-  background-color: red;
-}
-.orange {
-  background-color: orange;
-}
-.yellow {
-  background-color: yellow;
-}
-.green {
-  background-color: green;
-}
-.blue {
-  background-color: blue;
-}
-.purple {
-  background-color: purple;
-}
-.white {
-  background-color: white;
+.reset-btn {
+  padding: 14px;
+  border-radius: 9px;
+  border: none;
+  font-family: 'Bungee', cursive;
+  font-weight: bold;
+  font-size: 15px;
+  background: #c2ff02;
+  margin-bottom: 10px;
 }
