@@ -6,11 +6,14 @@ class Tile extends React.Component {
   }
 
   render() {
-    let content = this.props.tile.dotColor;
+    let color;
+    if (this.props.tile.dotColor) {
+      color = <div className={`color ${this.props.tile.dotColor}`}></div>;
+    }
 
     return (
-      <div>
-        {content}
+      <div className='tile'>
+        {color}
       </div>
     );
   }
