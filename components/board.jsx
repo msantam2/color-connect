@@ -33,8 +33,9 @@ class Board extends React.Component {
         <Tile tile={tile} key={i + j}
               currentColor={this.props.currentColor}
               updateCurrentColor={this.props.updateCurrentColor}
-              updateCurrentPos={this.updateCurrentPos}
-              updatePreviousPos= {this.updatePreviousPos}
+              updateCurrentPos={this.props.updateCurrentPos}
+              updatePreviousPos={this.props.updatePreviousPos}
+              previousPos={this.props.previousPos}
               reset={this.props.reset}
               updateReset={this.props.updateReset} />
       );

@@ -3,7 +3,7 @@ import PathSegment from './path_segment';
 
 class Tile extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); // has access to vanilla JS tile object
     this.state = {pathSegmentColor: null};
     this.handleDotClick = this.handleDotClick.bind(this);
     this.handlePathClick = this.handlePathClick.bind(this);
@@ -12,13 +12,17 @@ class Tile extends React.Component {
 
   handleDotClick(event) {
     let currentColor = event.target.id;
+    let previousPos = this.props.tile.pos;
     this.props.updateCurrentColor(currentColor);
+    this.props.updatePreviousPos(previousPos);
   }
 
-  handlePathClick() {
-    this.setState({
-      pathSegmentColor: this.props.currentColor
-    });
+  handlePathClick(event) {
+    if (this.props.previousPos && this.props.tile.isNeighbor(this.props.previousPos)) {
+      this.setState({
+        pathSegmentColor: this.props.currentColor
+      });
+    }
   }
 
   pathSegment() {
@@ -47,11 +51,12 @@ class Tile extends React.Component {
       let coloredDotStyle = {background: dotColor};
       tileContent =  <div id={dotColor}
                           className='colored-dot'
+                          data-pos={`${this.props.tile.pos}`}
                           style={coloredDotStyle}
                           onClick={this.handleDotClick}>
                      </div>;
     } else {
-      tileContent = <div className='path-tile' onClick={this.handlePathClick}>{this.pathSegment()}</div>;
+      tileContent = <div className='path-tile' data-pos={`${this.props.tile.pos}`} onClick={this.handlePathClick}>{this.pathSegment()}</div>;
     }
 
     return (

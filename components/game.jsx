@@ -73,6 +73,7 @@ class Game extends React.Component {
                updateCurrentColor={this.updateCurrentColor}
                updateCurrentPos={this.updateCurrentPos}
                updatePreviousPos={this.updatePreviousPos}
+               previousPos={this.state.previousPos}
                reset={this.state.reset}
                updateReset={this.updateReset} />
       </div>
