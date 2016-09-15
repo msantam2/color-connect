@@ -30,7 +30,13 @@ class Board extends React.Component {
   renderTiles(row, i) {
     return row.map((tile, j) => {
       return (
-        <Tile tile={tile} key={i + j} updateCurrentColor={this.props.updateCurrentColor} />
+        <Tile tile={tile} key={i + j}
+              currentColor={this.props.currentColor}
+              updateCurrentColor={this.props.updateCurrentColor}
+              updateCurrentPos={this.updateCurrentPos}
+              updatePreviousPos= {this.updatePreviousPos}
+              reset={this.props.reset}
+              updateReset={this.props.updateReset} />
       );
     });
   }

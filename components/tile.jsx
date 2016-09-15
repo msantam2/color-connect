@@ -1,9 +1,13 @@
 import React from 'react';
+import PathSegment from './path_segment';
 
 class Tile extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {pathSegmentColor: null};
     this.handleDotClick = this.handleDotClick.bind(this);
+    this.handlePathClick = this.handlePathClick.bind(this);
+    this.pathSegment = this.pathSegment.bind(this);
   }
 
   handleDotClick(event) {
@@ -11,21 +15,44 @@ class Tile extends React.Component {
     this.props.updateCurrentColor(currentColor);
   }
 
+  handlePathClick() {
+    this.setState({
+      pathSegmentColor: this.props.currentColor
+    });
+  }
+
+  pathSegment() {
+    if (this.state.pathSegmentColor) {
+      return <PathSegment color={this.state.pathSegmentColor} />;
+    }
+  }
+
+  clearState() {
+    this.setState({
+      pathSegmentColor: null
+    });
+  }
+
   render() {
-    let coloredDot;
+    let tileContent;
     if (this.props.tile.dotColor) {
-      let color = `${this.props.tile.dotColor}`;
-      let colorStyle = {background: color};
-      coloredDot =  <div id={color}
-                         className='color'
-                         style={colorStyle}
-                         onClick={this.handleDotClick}>
-                    </div>;
+      let dotColor = `${this.props.tile.dotColor}`;
+      let coloredDotStyle = {background: dotColor};
+      tileContent =  <div id={dotColor}
+                          className='colored-dot'
+                          style={coloredDotStyle}
+                          onClick={this.handleDotClick}>
+                     </div>;
+    } else if (this.props.reset) {
+      this.clearState();
+      this.props.updateReset();
+    } else {
+      tileContent = <div className='path-tile' onClick={this.handlePathClick}>{this.pathSegment()}</div>;
     }
 
     return (
       <div className='tile'>
-        {coloredDot}
+        {tileContent}
       </div>
     );
   }

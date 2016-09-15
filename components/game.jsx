@@ -7,26 +7,51 @@ class Game extends React.Component {
     super(props);
     const board = new ColorConnect.Board(1);
     this.state = {board: board,
-                  currentColor: null};
+                  currentColor: null,
+                  currentPos: null,
+                  previousPos: null,
+                  reset: false};
     this.resetLevel = this.resetLevel.bind(this);
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
+    this.updateCurrentPos = this.updateCurrentPos.bind(this);
+    this.updatePreviousPos = this.updatePreviousPos.bind(this);
+    this.updateReset = this.updateReset.bind(this);
   }
 
   resetLevel() {
-    const board = new ColorConnect.Board(1);
+    const newBoard = new ColorConnect.Board(1);
     this.setState({
-      board: board
+      board: newBoard,
+      reset: true
+    });
+  }
+
+  updateReset() {
+    this.setState({
+      reset: false,
+      currentColor: null
     });
   }
 
   updateCurrentColor(color) {
     this.setState({
-      currentColor: color
+      currentColor: color,
+    });
+  }
+
+  updateCurrentPos(pos) {
+    this.setState({
+      currentPos: pos
+    });
+  }
+
+  updatePreviousPos(pos) {
+    this.setState({
+      previousPos: pos
     });
   }
 
   render() {
-    debugger
     let modal;
     if (this.state.board.won()) {
       const text = "You won!";
@@ -43,7 +68,13 @@ class Game extends React.Component {
       <div>
         {modal}
         <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
-        <Board board={this.state.board} updateCurrentColor={this.updateCurrentColor} />
+        <Board board={this.state.board}
+               currentColor={this.state.currentColor}
+               updateCurrentColor={this.updateCurrentColor}
+               updateCurrentPos={this.updateCurrentPos}
+               updatePreviousPos={this.updatePreviousPos}
+               reset={this.state.reset}
+               updateReset={this.updateReset} />
       </div>
     );
   }
