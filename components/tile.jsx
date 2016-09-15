@@ -33,6 +33,13 @@ class Tile extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    if (this.props.reset) {
+      this.props.updateReset();
+      this.clearState();
+    }
+  }
+
   render() {
     let tileContent;
     if (this.props.tile.dotColor) {
@@ -43,9 +50,6 @@ class Tile extends React.Component {
                           style={coloredDotStyle}
                           onClick={this.handleDotClick}>
                      </div>;
-    } else if (this.props.reset) {
-      this.clearState();
-      this.props.updateReset();
     } else {
       tileContent = <div className='path-tile' onClick={this.handlePathClick}>{this.pathSegment()}</div>;
     }
