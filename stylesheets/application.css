@@ -19,6 +19,10 @@ button:active {
   top: 2px;
 }
 
+.game-container {
+  margin-top: -36px;
+}
+
 .game-title {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -63,7 +67,7 @@ button:active {
   height: 100%;
 }
 
-.reset-btn {
+.reset-btn, .about-btn {
   padding: 14px;
   border-radius: 9px;
   border: none;
@@ -125,4 +129,13 @@ button:active {
 
 .play-again-btn {
   margin-right: 11px;
+}
+
+.github, .linkedin {
+  height: 43px;
+  margin-top: 4px;
+}
+
+.linkedin {
+  float: right;
 }
