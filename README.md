@@ -15,7 +15,10 @@ Color Connect is a game that is all about connecting the dots! Colored dots, tha
 
 ### Single-Page Game
 
-Color Connect is a single-page browser-based game written in vanilla JavaScript in conjunction with React.js. The Board itself is a React component which contains a series of Tile components. The Tile components can be divided into 2 categories: 1) fixed colored dots the user must connect or 2) an empty tile that will dynamically update its color based off user input.
+Color Connect is a single-page browser-based game written in vanilla JavaScript in conjunction with React.js. The `Board` itself is a React component which contains a series of `Tile` components. The `Tile` components can be divided into 2 categories:
+
+1. fixed colored dots the user must connect or
+2. an empty tile that will dynamically update its color based off user input.
 
 This game-structure is fundamentally implemented through the following code:
 
@@ -33,14 +36,43 @@ populateBoard(gridSize) {
   }
 }
 ```
-If the Tile position is equal to a preset dot position, it will be initialized with that dot's color and later become a 'fixed dot component'.
+If the `Tile` position is equal to a preset dot position, it will be initialized with that dot's color and later become a 'fixed dot component'.
 For each level, the colored dots must be preset in order to ensure there is a correct solution for each level. If the board were randomly generated as many other games are, it is possible a colored dot may be trapped in a corner of the board, not allowing a valid path to ever be connected to/from this dot.
 
 ## Features
 
-Upon each re-render of the React Board component, the game must be responsible for checking if the player has been won (there is only one correct solution for each level). In order to achieve this, a recursive solution is utilized that iterates through each color and checks every connection from the starting color tile to the ending color tile. If each color pair is connected by a valid path, the user has won.
+### Choosing Colors and Creating Paths
 
-As seen in the following code, #validPathCreated is implementing the recursive call, stepping from tile to tile in order to check if the path leads to the 'endTile' (i.e. has a neighbor of 'endTile'). In order to avoid infinite looping, already visited positions are stored within an instance variable 'this.visitedTiles'. Since the path proceeds in a step-wise fashion, only the last visited Tile needs to be removed from the current Tile's list of neighbors (LIFO fashion).
+The user needs to choose which color path they wish to create. In order to dynamically allow the user to choose, a click handler is bound to each colored dot. Upon clicking a colored dot, a callback is invoked that updates of the `currentColor` of the game. While this state is owned by the `Game` component, it is passed down to the appropriate `Tile` component as props. When clicked upon, the `currentColor` is updated and causes a re-rendering of the component hierarchy.
+
+```js
+handleDotClick(dotColor) {
+  this.props.updateCurrentColor(dotColor);
+  this.props.updatePreviousPos(this.props.tile.pos);
+}
+```
+
+Following this action, a user will click empty tiles where they want the path segment to go. The `Game`, though, must control where the user is allowed to lay a path segment. It must be connected to a previous path segment and be a valid neighbor (i.e. not a diagonal tile, only up, down, left, right). In the same fashion as dot tiles, path tiles are bound to a click handler as well that accomplishes this task:
+
+```js
+handlePathClick() {
+  if (this.state.pathSegmentColor === this.props.currentColor) {
+    this.clearState();
+  } else if (this.props.previousPos && this.props.tile.isNeighbor(this.props.previousPos)) {
+    this.setState({
+      pathSegmentColor: this.props.currentColor
+    });
+    this.props.updatePreviousPos(this.props.tile.pos);
+    this.props.tile.filledPathColor = this.props.currentColor;
+  }
+}
+```
+
+### Winning Condition
+
+Upon each re-render of the React `Board` component, the game must be responsible for checking if the player has been won (there is only one correct solution for each level). In order to achieve this, a recursive solution is utilized that iterates through each color and checks every connection from the starting dot tile to the ending dot tile. If every color pair is connected by a valid path, the user has won.
+
+As seen in the following code, `validPathCreated` is implementing the recursive call, stepping from tile to tile in order to check if the path leads to the `endTile` (i.e. has a neighbor of `endTile`). In order to avoid infinite looping, already visited positions are stored within an instance variable `this.visitedTiles`. Since the path proceeds in a step-wise fashion, only the last visited `Tile` needs to be removed from the current `Tile`'s list of neighbors (LIFO fashion).
 
 ```js
 won() {
@@ -88,6 +120,9 @@ validPathCreated(color, startTile, endTile) {
   return false;
 }
 ```
+There are 2 base cases for the recursive `validPathCreated` function:
+1. The `startTile` has no neighboring tiles with the same color, causing an early return of 'false', because there is no way in which a valid path could be created with no neighboring tiles of the same color.
+2. The `startTile` has become neighbors with the `endTile`, returning true. The `startTile` is updated during each recursive call, effectively 'stepping-through' the path from tile to tile until you reach the end of the path (either at a 'dead end' (returns false) or the `endTile` (returns true))
 
 ```js
 sameColoredNeighbors(color, startTile) {
