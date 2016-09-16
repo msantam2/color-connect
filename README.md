@@ -8,30 +8,118 @@ Color Connect is a game that is all about connecting the dots! Colored dots, tha
 - [ ] No lines may overlap
 - [ ] Every space in the grid must be filled (either by a colored dot or a segment of a line)
 
-![wireframes](https://github.com/appacademy/job-search-curriculum/blob/master/job-search-projects/images/js_wireframe.jpeg)
-![wireframes](https://github.com/appacademy/job-search-curriculum/blob/master/job-search-projects/images/js_wireframe.jpeg)
+![wireframes](https://github.com/msantam2/color-connect/blob/master/images/blank_grid.png)
+![wireframes](https://github.com/msantam2/color-connect/blob/master/images/grid.png)
 
+## Architecture & Technologies
 
-## Features & Implementation
+### Single-Page Game
 
-### Single-Page App
+Color Connect is a single-page browser-based game written in vanilla JavaScript in conjunction with React.js. The Board itself is a React component which contains a series of Tile components. The Tile components can be divided into 2 categories: 1) fixed colored dots the user must connect or 2) an empty tile that will dynamically update its color based off user input.
 
-inDecks is a simple and intuitive, single-page application. All content is delivered on the frontend, with the root page listening to user input and rendering a React component dynamically. The use of the React Router gives the user a feeling of navigation, as if they are in control of the app when the url changes. The Redux architecture in conjuction with React allows inDecks to operate via a smooth cycle, allowing rails to simply be an API, serving JSON back to the frontend.`
+This game-structure is fundamentally implemented through the following code:
 
-### Flashcard Studying
+```js
+populateBoard(gridSize) {
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      let dotColor = this.dotColor([i, j]);
+      if (dotColor) {
+        this.grid[i][j] = new Tile(this, [i, j], dotColor);
+      } else {
+        this.grid[i][j] = new Tile(this, [i, j]);
+      }
+    }
+  }
+}
+```
+If the Tile position is equal to a preset dot position, it will be initialized with that dot's color and later become a 'fixed dot component'.
+For each level, the colored dots must be preset in order to ensure there is a correct solution for each level. If the board were randomly generated as many other games are, it is possible a colored dot may be trapped in a corner of the board, not allowing a valid path to ever be connected to/from this dot.
 
+## Features
 
+Upon each re-render of the React Board component, the game must be responsible for checking if the player has been won (there is only one correct solution for each level). In order to achieve this, a recursive solution is utilized that iterates through each color and checks every connection from the starting color tile to the ending color tile. If each color pair is connected by a valid path, the user has won.
 
-### Deck CRUD
+As seen in the following code, #validPathCreated is implementing the recursive call, stepping from tile to tile in order to check if the path leads to the 'endTile' (i.e. has a neighbor of 'endTile'). In order to avoid infinite looping, already visited positions are stored within an instance variable 'this.visitedTiles'. Since the path proceeds in a step-wise fashion, only the last visited Tile needs to be removed from the current Tile's list of neighbors (LIFO fashion).
 
+```js
+won() {
+  this.visitedTiles = [];
+  let colors = Object.keys(Board.COLOR_POSITIONS[this.level]);
 
+  for (let i = 0; i < colors.length; i++) {
+    let color = colors[i];
+    let startPos = Board.COLOR_POSITIONS[this.level][color][0];
+    let endPos = Board.COLOR_POSITIONS[this.level][color][1];
+    let startTile = this.grid[startPos[0]][startPos[1]];
+    let endTile = this.grid[endPos[0]][endPos[1]];
 
-## Future Directions for the Project
+    if (!this.validPathCreated(color, startTile, endTile)) {
+      return false;
+    }
+  }
 
-### Subjects
+  return true;
+}
+```
 
-Another way to enhance the study experience for the user and allow them to further organize their thoughts and information will be to create a Subjects layer, with Decks nested within. For example, a 'Biology' subject may contain decks 'Anatomy', 'Zoology', and 'Microbiology'.
+```js
+validPathCreated(color, startTile, endTile) {
+  if (this.sameColoredNeighbors(color, startTile).length === 0) {
+    return false;
+  } else if (startTile.isNeighbor(endTile.pos)) {
+    return true;
+  }
 
-### Search
+  let sameColoredNeighbors = this.sameColoredNeighbors(color, startTile);
+  let visitedTileIndex = sameColoredNeighbors.indexOf(this.visitedTiles[this.visitedTiles.length - 1]);
+  if (visitedTileIndex !== -1) {
+    sameColoredNeighbors.splice(visitedTileIndex, 1);
+  }
+  this.visitedTiles.push(startTile);
 
-To create a richer community of students on inDecks, Search would be a major factor. Students will 'own' their own, private decks while being able to search amongst public decks created by other users and add them to their library.
+  for (let i = 0; i < sameColoredNeighbors.length; i++) {
+    let newStartTile = sameColoredNeighbors[i];
+    if (this.validPathCreated(color, newStartTile, endTile)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+```
+
+```js
+sameColoredNeighbors(color, startTile) {
+  let sameColoredNeighbors = [];
+
+  for (let i = 0; i < Board.DELTAS.length; i++) {
+    let delta = Board.DELTAS[i];
+    let newPos = [startTile.pos[0] + delta[0],
+                  startTile.pos[1] + delta[1]];
+
+    if (this.onBoard(newPos)) {
+      let newTile = this.grid[newPos[0]][newPos[1]];
+
+      let startTileColor = startTile.dotColor ? startTile.dotColor : startTile.filledPathColor;
+      let newTileColor = newTile.dotColor ? newTile.dotColor : newTile.filledPathColor;
+
+      if (startTileColor === newTileColor) {
+        sameColoredNeighbors.push(newTile);
+      }
+    }
+  }
+
+  return sameColoredNeighbors;
+}
+```
+
+## Future Directions for Color Connect
+
+### Path Segments
+
+In order to enhance the user experience of Color Connect, I plan in the near future to dynamically render React tile sub-components that display the direction of a path more clearly (e.g. vertical lines, horizontal lines, and bent-lines)
+
+### Solutions
+
+If the player becomes stuck to the point of not being able to proceed, a very useful feature I plan to implement is to allow the player to select an option to view the solution and proceed to the next level. The solution will be instantly populated on the player's view of the board.
