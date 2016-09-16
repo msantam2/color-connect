@@ -35,7 +35,7 @@ class Game extends React.Component {
 
   updateCurrentColor(color) {
     this.setState({
-      currentColor: color,
+      currentColor: color
     });
   }
 
