@@ -67,7 +67,10 @@ class Game extends React.Component {
     return (
       <div>
         {modal}
-        <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
+        <div className='game-header'>
+          <h1 className='level-header'>{`Level ${this.state.board.level}`}</h1>
+          <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
+        </div>
         <Board board={this.state.board}
                currentColor={this.state.currentColor}
                updateCurrentColor={this.updateCurrentColor}

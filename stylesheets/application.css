@@ -72,4 +72,16 @@ button:active {
   font-size: 15px;
   background: #c2ff02;
   margin-bottom: 10px;
+  height: 50%; 
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.level-header {
+  color: white;
+  font-family: 'Bungee', cursive;
 }
