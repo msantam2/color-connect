@@ -8,8 +8,8 @@ Color Connect is a game that is all about connecting the dots! Colored dots, tha
 - [ ] No lines may overlap
 - [ ] Every space in the grid must be filled (either by a colored dot or a segment of a line)
 
-<img src="https://github.com/msantam2/color-connect/blob/master/images/blank_grid.png" width="500" height="500" />
-![wireframes](https://github.com/msantam2/color-connect/blob/master/images/grid.png)
+<img src="https://github.com/msantam2/color-connect/blob/master/images/blank_grid.png" width="400" height="400" />
+<img src="https://github.com/msantam2/color-connect/blob/master/images/grid.png" width="400" height="400" />
 
 ## Architecture & Technologies
 
