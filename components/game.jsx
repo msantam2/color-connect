@@ -58,8 +58,9 @@ class Game extends React.Component {
       modal =
         <div className='modal-screen'>
           <div className='modal-content'>
-            <p className='you-won'>{text}</p>
-            <button onClick={this.resetLevel}>Play Again</button>
+            <p className='you-won-text'>{text}</p>
+            <button className='play-again-btn' onClick={this.resetLevel}>Play Again</button>
+            <button className='next-level-btn'>Next Level</button>
           </div>
         </div>;
     }

@@ -72,7 +72,7 @@ button:active {
   font-size: 15px;
   background: #c2ff02;
   margin-bottom: 10px;
-  height: 50%; 
+  height: 50%;
 }
 
 .game-header {
@@ -84,4 +84,45 @@ button:active {
 .level-header {
   color: white;
   font-family: 'Bungee', cursive;
+}
+
+.modal-screen {
+  z-index: 998;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  background: rgba(0, 0, 0, .3);
+}
+
+.modal-content {
+  z-index: 999;
+  position: absolute;
+  background: #98ff1c;
+  border-radius: 5px;
+  border: 1px solid black;
+  font-size: 20px;
+  width: 300px;
+  height: 138px;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.you-won-text {
+  font-family: 'Bungee', cursive;
+}
+
+.play-again-btn, .next-level-btn {
+  cursor: pointer;
+  padding: 15px;
+  background: white;
+  border: 2px dashed #9C27B0;
+  font-size: 16px;
+}
+
+.play-again-btn {
+  margin-right: 11px;
 }
