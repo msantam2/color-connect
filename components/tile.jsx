@@ -3,7 +3,7 @@ import PathSegment from './path_segment';
 
 class Tile extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); // this.props.validPaths
     this.state = {pathSegmentColor: null};
     this.handleDotClick = this.handleDotClick.bind(this);
     this.handlePathClick = this.handlePathClick.bind(this);
@@ -24,7 +24,7 @@ class Tile extends React.Component {
         pathSegmentColor: this.props.currentColor
       });
       this.props.updatePreviousPos(this.props.tile.pos);
-      this.props.tile.filledPathColor = this.props.currentColor; 
+      this.props.tile.filledPathColor = this.props.currentColor;
     }
   }
 
@@ -49,9 +49,18 @@ class Tile extends React.Component {
 
   render() {
     let tileContent;
+    let cursorReset;
+
     if (this.props.tile.dotColor) {
       let dotColor = `${this.props.tile.dotColor}`;
-      let coloredDotStyle = {background: dotColor};
+      let coloredDotStyle;
+      if (this.props.validPaths.includes(dotColor)) {
+        coloredDotStyle = {background: dotColor, border: '3px solid #3ff858'};
+      } else {
+        coloredDotStyle = {background: dotColor};
+      }
+      cursorReset = 'cursor-reset';
+
       tileContent =  <div className='colored-dot'
                           style={coloredDotStyle}
                           onClick={this.handleDotClick.bind(null, dotColor)}>
@@ -61,7 +70,7 @@ class Tile extends React.Component {
     }
 
     return (
-      <div className='tile'>
+      <div className={`tile ${cursorReset}`}>
         {tileContent}
       </div>
     );
