@@ -48,7 +48,7 @@ The user needs to choose which color path they wish to create. In order to dynam
 ```js
 handleDotClick(dotColor) {
   this.props.updateCurrentColor(dotColor);
-  this.props.updatePreviousPos(this.props.tile.pos);
+  this.props.updatePreviousTile(this.props.tile);
 }
 ```
 
@@ -58,11 +58,11 @@ Following this action, a user will click empty tiles where they want the path se
 handlePathClick() {
   if (this.state.pathSegmentColor === this.props.currentColor) {
     this.clearState();
-  } else if (this.props.previousPos && this.props.tile.isNeighbor(this.props.previousPos)) {
+  } else if (this.props.previousTile && this.props.tile.isNeighbor(this.props.previousTile)) {
     this.setState({
       pathSegmentColor: this.props.currentColor
     });
-    this.props.updatePreviousPos(this.props.tile.pos);
+    this.props.updatePreviousTile(this.props.tile);
     this.props.tile.filledPathColor = this.props.currentColor;
   }
 }

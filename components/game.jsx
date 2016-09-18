@@ -10,14 +10,12 @@ class Game extends React.Component {
     const board = new ColorConnect.Board(1);
     this.state = {board: board,
                   currentColor: null,
-                  currentPos: null,
-                  previousPos: null,
+                  previousTile: null,
                   reset: false,
                   modalOpen: false};
     this.resetLevel = this.resetLevel.bind(this);
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
-    this.updateCurrentPos = this.updateCurrentPos.bind(this);
-    this.updatePreviousPos = this.updatePreviousPos.bind(this);
+    this.updatePreviousTile = this.updatePreviousTile.bind(this);
     this.updateReset = this.updateReset.bind(this);
     this._handleAboutClick = this._handleAboutClick.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
@@ -45,15 +43,9 @@ class Game extends React.Component {
     });
   }
 
-  updateCurrentPos(pos) {
+  updatePreviousTile(tile) {
     this.setState({
-      currentPos: pos
-    });
-  }
-
-  updatePreviousPos(pos) {
-    this.setState({
-      previousPos: pos
+      previousTile: tile
     });
   }
 
@@ -99,9 +91,8 @@ class Game extends React.Component {
         <Board board={this.state.board}
                currentColor={this.state.currentColor}
                updateCurrentColor={this.updateCurrentColor}
-               updateCurrentPos={this.updateCurrentPos}
-               updatePreviousPos={this.updatePreviousPos}
-               previousPos={this.state.previousPos}
+               updatePreviousTile={this.updatePreviousTile}
+               previousTile={this.state.previousTile}
                reset={this.state.reset}
                updateReset={this.updateReset} />
 

@@ -34,9 +34,8 @@ class Board extends React.Component {
               validPaths={this.props.board.validPaths}
               currentColor={this.props.currentColor}
               updateCurrentColor={this.props.updateCurrentColor}
-              updateCurrentPos={this.props.updateCurrentPos}
-              updatePreviousPos={this.props.updatePreviousPos}
-              previousPos={this.props.previousPos}
+              updatePreviousTile={this.props.updatePreviousTile}
+              previousTile={this.props.previousTile}
               reset={this.props.reset}
               updateReset={this.props.updateReset} />
       );
