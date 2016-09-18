@@ -8,7 +8,8 @@ class Tile extends React.Component {
     this.handleDotClick = this.handleDotClick.bind(this);
     this.handlePathClick = this.handlePathClick.bind(this);
     this.renderPathSegment = this.renderPathSegment.bind(this);
-    this.clearState = this.clearState.bind(this);
+    this.clearColor = this.clearColor.bind(this);
+    this.setColor = this.setColor.bind(this);
   }
 
   handleDotClick(dotColor) {
@@ -18,11 +19,9 @@ class Tile extends React.Component {
 
   handlePathClick() {
     if (this.state.pathSegmentColor) {
-      this.clearState();
+      this.clearColor();
     } else if (this.props.previousTile && this.props.tile.isNeighbor(this.props.previousTile)) {
-      this.setState({
-        pathSegmentColor: this.props.currentColor
-      });
+      this.setColor();
       this.props.updatePreviousTile(this.props.tile);
       this.props.tile.filledPathColor = this.props.currentColor;
     }
@@ -34,16 +33,22 @@ class Tile extends React.Component {
     }
   }
 
-  clearState() {
+  clearColor() {
     this.setState({
       pathSegmentColor: null
     });
   }
 
+  setColor() {
+    this.setState({
+      pathSegmentColor: this.props.currentColor
+    });
+  }
+
   componentDidUpdate() {
-    if (this.props.reset) {
-      this.props.updateReset();
-      this.clearState();
+    if (this.props.resetBoard) {
+      this.props.updateResetBoard();
+      this.clearColor();
     }
   }
 
@@ -56,7 +61,6 @@ class Tile extends React.Component {
       let coloredDotStyle;
       if (this.props.validPaths.includes(dotColor)) {
         coloredDotStyle = {background: dotColor, border: '3px solid #3ff858'};
-        // debugger
       } else {
         coloredDotStyle = {background: dotColor};
       }

@@ -11,12 +11,12 @@ class Game extends React.Component {
     this.state = {board: board,
                   currentColor: null,
                   previousTile: null,
-                  reset: false,
+                  resetBoard: false,
                   modalOpen: false};
     this.resetLevel = this.resetLevel.bind(this);
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.updatePreviousTile = this.updatePreviousTile.bind(this);
-    this.updateReset = this.updateReset.bind(this);
+    this.updateResetBoard = this.updateResetBoard.bind(this);
     this._handleAboutClick = this._handleAboutClick.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
     this.onModalOpen = this.onModalOpen.bind(this);
@@ -26,13 +26,13 @@ class Game extends React.Component {
     const newBoard = new ColorConnect.Board(1);
     this.setState({
       board: newBoard,
-      reset: true
+      resetBoard: true
     });
   }
 
-  updateReset() {
+  updateResetBoard() {
     this.setState({
-      reset: false,
+      resetBoard: false,
       currentColor: null
     });
   }
@@ -93,8 +93,8 @@ class Game extends React.Component {
                updateCurrentColor={this.updateCurrentColor}
                updatePreviousTile={this.updatePreviousTile}
                previousTile={this.state.previousTile}
-               reset={this.state.reset}
-               updateReset={this.updateReset} />
+               resetBoard={this.state.resetBoard}
+               updateResetBoard={this.updateResetBoard} />
 
         <a href='https://github.com/msantam2/color-connect'><img  className='github' src='http://www.iconsdb.com/icons/preview/white/github-10-xxl.png ' /></a>
         <a href='https://www.linkedin.com/in/mattsantamaria123'><img  className='linkedin'  src='http://www.iconsdb.com/icons/preview/white/linkedin-xxl.png'  /></a>

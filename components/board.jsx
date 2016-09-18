@@ -36,8 +36,8 @@ class Board extends React.Component {
               updateCurrentColor={this.props.updateCurrentColor}
               updatePreviousTile={this.props.updatePreviousTile}
               previousTile={this.props.previousTile}
-              reset={this.props.reset}
-              updateReset={this.props.updateReset} />
+              resetBoard={this.props.resetBoard}
+              updateResetBoard={this.props.updateResetBoard} />
       );
     });
   }
