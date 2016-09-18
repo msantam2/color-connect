@@ -9,7 +9,7 @@ Color Connect is a game that is all about connecting the dots! Colored dots, tha
 - [ ] Every space in the grid must be filled (either by a colored dot or a segment of a line)
 
 <img src="https://github.com/msantam2/color-connect/blob/master/images/blank_grid.png" width="400" height="400" />
-<img src="https://github.com/msantam2/color-connect/blob/master/images/grid.png" width="400" height="400" />
+<img src="https://github.com/msantam2/color-connect/blob/master/images/grid_mid_game.png" width="400" height="400" />
 
 ## Architecture & Technologies
 
