@@ -3,7 +3,7 @@
 [Color Connect live!][colorConnect]
 [colorConnect]: https://msantam2.github.io/color-connect/
 
-Color Connect is a game that is all about connecting the dots! Colored dots, that is. The player is provided a grid that contains several different colors scattered within it (2 dots of each color). The goal is to draw a line connecting dots of the same color. The player must make sure to adhere to the following rules:
+Color Connect is a game that is all about connecting the dots! Colored dots, that is. Inspired by Flow Free, the player is provided with a grid that contains several different colors scattered within it (2 dots of each color). The goal is to draw a line connecting dots of the same color. The player must make sure to adhere to the following rules:
 
 - [ ] No lines may overlap
 - [ ] Every space in the grid must be filled (either by a colored dot or a segment of a line)
