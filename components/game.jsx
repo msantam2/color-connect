@@ -11,28 +11,29 @@ class Game extends React.Component {
     this.state = {board: board,
                   currentColor: null,
                   previousTile: null,
-                  resetBoard: false,
+                  boardReset: false,
                   modalOpen: false};
-    this.resetLevel = this.resetLevel.bind(this);
+    this.resetBoard = this.resetBoard.bind(this);
+    this.updateBoardReset = this.updateBoardReset.bind(this);
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.updatePreviousTile = this.updatePreviousTile.bind(this);
-    this.updateResetBoard = this.updateResetBoard.bind(this);
+
     this._handleAboutClick = this._handleAboutClick.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
     this.onModalOpen = this.onModalOpen.bind(this);
   }
 
-  resetLevel() {
-    const newBoard = new ColorConnect.Board(1);
+  resetBoard() {
+    const newBoard = new ColorConnect.Board(this.state.board.level);
     this.setState({
       board: newBoard,
-      resetBoard: true
+      boardReset: true
     });
   }
 
-  updateResetBoard() {
+  updateBoardReset() {
     this.setState({
-      resetBoard: false,
+      boardReset: false,
       currentColor: null
     });
   }
@@ -74,7 +75,7 @@ class Game extends React.Component {
         <div className='modal-screen'>
           <div className='modal-content'>
             <p className='you-won-text'>{text}</p>
-            <button className='play-again-btn' onClick={this.resetLevel}>Play Again</button>
+            <button className='play-again-btn' onClick={this.resetBoard}>Play Again</button>
             <button className='next-level-btn'>Next Level</button>
           </div>
         </div>;
@@ -86,15 +87,15 @@ class Game extends React.Component {
         <div className='game-header'>
           <button className='about-btn' onClick={this._handleAboutClick}>About</button>
           <h1 className='level-header'>{`Level ${this.state.board.level}`}</h1>
-          <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
+          <button className='reset-btn' onClick={this.resetBoard}>Reset</button>
         </div>
         <Board board={this.state.board}
                currentColor={this.state.currentColor}
                updateCurrentColor={this.updateCurrentColor}
                updatePreviousTile={this.updatePreviousTile}
                previousTile={this.state.previousTile}
-               resetBoard={this.state.resetBoard}
-               updateResetBoard={this.updateResetBoard} />
+               boardReset={this.state.boardReset}
+               updateBoardReset={this.updateBoardReset} />
 
         <a href='https://github.com/msantam2/color-connect'><img  className='github' src='http://www.iconsdb.com/icons/preview/white/github-10-xxl.png ' /></a>
         <a href='https://www.linkedin.com/in/mattsantamaria123'><img  className='linkedin'  src='http://www.iconsdb.com/icons/preview/white/linkedin-xxl.png'  /></a>

@@ -46,8 +46,8 @@ class Tile extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.resetBoard) {
-      this.props.updateResetBoard();
+    if (this.props.boardReset) {
+      this.props.updateBoardReset();
       this.clearColor();
     }
   }
