@@ -59,7 +59,7 @@ class Tile extends React.Component {
     if (this.props.tile.dotColor) {
       let dotColor = `${this.props.tile.dotColor}`;
       let coloredDotStyle;
-      if (this.props.validPaths.includes(dotColor)) {
+      if (this.props.validPathColors.includes(dotColor)) {
         coloredDotStyle = {background: dotColor, border: '3px solid #3ff858'};
       } else {
         coloredDotStyle = {background: dotColor};

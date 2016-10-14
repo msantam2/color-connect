@@ -31,7 +31,7 @@ class Board extends React.Component {
     return row.map((tile, j) => {
       return (
         <Tile tile={tile} key={i + j}
-              validPaths={this.props.board.validPaths}
+              validPathColors={this.props.board.validPathColors}
               currentColor={this.props.currentColor}
               updateCurrentColor={this.props.updateCurrentColor}
               updatePreviousTile={this.props.updatePreviousTile}
