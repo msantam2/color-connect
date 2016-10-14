@@ -13,17 +13,16 @@ class Game extends React.Component {
                   previousTile: null,
                   boardReset: false,
                   modalOpen: false};
-    this.resetBoard = this.resetBoard.bind(this);
+    this.resetLevel = this.resetLevel.bind(this);
     this.updateBoardReset = this.updateBoardReset.bind(this);
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.updatePreviousTile = this.updatePreviousTile.bind(this);
-
     this._handleAboutClick = this._handleAboutClick.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
     this.onModalOpen = this.onModalOpen.bind(this);
   }
 
-  resetBoard() {
+  resetLevel() {
     const newBoard = new ColorConnect.Board(this.state.board.level);
     this.setState({
       board: newBoard,
@@ -75,7 +74,7 @@ class Game extends React.Component {
         <div className='modal-screen'>
           <div className='modal-content'>
             <p className='you-won-text'>{text}</p>
-            <button className='play-again-btn' onClick={this.resetBoard}>Play Again</button>
+            <button className='play-again-btn' onClick={this.resetLevel}>Play Again</button>
             <button className='next-level-btn'>Next Level</button>
           </div>
         </div>;
@@ -87,7 +86,7 @@ class Game extends React.Component {
         <div className='game-header'>
           <button className='about-btn' onClick={this._handleAboutClick}>About</button>
           <h1 className='level-header'>{`Level ${this.state.board.level}`}</h1>
-          <button className='reset-btn' onClick={this.resetBoard}>Reset</button>
+          <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
         </div>
         <Board board={this.state.board}
                currentColor={this.state.currentColor}
