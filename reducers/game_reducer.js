@@ -1,13 +1,7 @@
 import { GameConstants } from '../actions/game_actions';
 import merge from 'lodash/merge';
 
-// const _initialState = Object.freeze({
-//   currentColor: null,
-//   previousTile: null,
-//   boardReset: false
-// });
-
-const GameReducer = (state = _initialState, action) => {
+const GameReducer = (state, action) => {
   let nextState;
 
   switch (action.type) {
@@ -16,17 +10,16 @@ const GameReducer = (state = _initialState, action) => {
       return merge({}, state, {
         currentColor
       });
-      // nextState = merge({}, state, );
-      // nextState['currentColor'] = action.color;
-      // return nextState;
     case (GameConstants.UPDATE_PREVIOUS_TILE):
-      nextState = merge({}, state);
-      nextState['previousTile'] = action.tile;
-      return nextState;
+      const previousTile = action.tile;
+      return merge({}, state, {
+        previousTile
+      });
     case (GameConstants.TOGGLE_BOARD_RESET):
-      nextState = merge({}, state);
-      nextState['boardReset'] = !state['boardReset'];
-      return nextState;
+      const boardReset = !state['boardReset'];
+      return merge({}, state, {
+        boardReset
+      });
     default:
       return state;
   }
