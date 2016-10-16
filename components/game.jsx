@@ -42,7 +42,6 @@ class Game extends React.Component {
   }
 
   render() {
-    debugger
     let modal;
     if (this.state.board.won()) {
       const text = "You won!";
@@ -55,6 +54,7 @@ class Game extends React.Component {
           </div>
         </div>;
     }
+
     return (
       <div className='game-container'>
         {modal}
@@ -64,8 +64,11 @@ class Game extends React.Component {
           <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
         </div>
         <Board board={this.state.board}
+               currentColor={this.props.currentColor}
                updateCurrentColor={this.props.updateCurrentColor}
+               previousTile={this.props.previousTile}
                updatePreviousTile={this.props.updatePreviousTile}
+               boardReset={this.props.boardReset}
                toggleBoardReset={this.props.toggleBoardReset} />
 
         <a href='https://github.com/msantam2/color-connect'><img  className='github' src='http://www.iconsdb.com/icons/preview/white/github-10-xxl.png ' /></a>

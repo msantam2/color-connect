@@ -32,8 +32,11 @@ class Board extends React.Component {
       return (
         <Tile tile={tile} key={i + j}
               validPathColors={this.props.board.validPathColors}
+              currentColor={this.props.currentColor}
               updateCurrentColor={this.props.updateCurrentColor}
+              previousTile={this.props.previousTile}
               updatePreviousTile={this.props.updatePreviousTile}
+              boardReset={this.props.boardReset}
               toggleBoardReset={this.props.toggleBoardReset} />
       );
     });

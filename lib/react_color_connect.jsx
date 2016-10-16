@@ -7,6 +7,11 @@ import Modal from 'react-modal';
 document.addEventListener('DOMContentLoaded', () => {
   Modal.setAppElement(document.body);
   const root = document.getElementById('root');
-  const store = configureStore();
+  const preloadedState = {
+    currentColor: null,
+    previousTile: null,
+    boardReset: false
+  };
+  const store = configureStore(preloadedState);
   ReactDOM.render(<Root store={store} />, root);
 });
