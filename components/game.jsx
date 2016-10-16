@@ -9,14 +9,8 @@ class Game extends React.Component {
     super(props);
     const board = new ColorConnect.Board(1);
     this.state = {board: board,
-                  currentColor: null,
-                  previousTile: null,
-                  boardReset: false,
                   modalOpen: false};
     this.resetLevel = this.resetLevel.bind(this);
-    this.updateBoardReset = this.updateBoardReset.bind(this);
-    this.updateCurrentColor = this.updateCurrentColor.bind(this);
-    this.updatePreviousTile = this.updatePreviousTile.bind(this);
     this._handleAboutClick = this._handleAboutClick.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
     this.onModalOpen = this.onModalOpen.bind(this);
@@ -26,26 +20,7 @@ class Game extends React.Component {
     const newBoard = new ColorConnect.Board(this.state.board.level);
     this.setState({
       board: newBoard,
-      boardReset: true
-    });
-  }
-
-  updateBoardReset() {
-    this.setState({
-      boardReset: false,
-      currentColor: null
-    });
-  }
-
-  updateCurrentColor(color) {
-    this.setState({
-      currentColor: color
-    });
-  }
-
-  updatePreviousTile(tile) {
-    this.setState({
-      previousTile: tile
+      // boardReset: true
     });
   }
 
@@ -67,6 +42,7 @@ class Game extends React.Component {
   }
 
   render() {
+    debugger
     let modal;
     if (this.state.board.won()) {
       const text = "You won!";
@@ -79,7 +55,6 @@ class Game extends React.Component {
           </div>
         </div>;
     }
-
     return (
       <div className='game-container'>
         {modal}
@@ -89,12 +64,9 @@ class Game extends React.Component {
           <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
         </div>
         <Board board={this.state.board}
-               currentColor={this.state.currentColor}
-               updateCurrentColor={this.updateCurrentColor}
-               updatePreviousTile={this.updatePreviousTile}
-               previousTile={this.state.previousTile}
-               boardReset={this.state.boardReset}
-               updateBoardReset={this.updateBoardReset} />
+               updateCurrentColor={this.props.updateCurrentColor}
+               updatePreviousTile={this.props.updatePreviousTile}
+               toggleBoardReset={this.props.toggleBoardReset} />
 
         <a href='https://github.com/msantam2/color-connect'><img  className='github' src='http://www.iconsdb.com/icons/preview/white/github-10-xxl.png ' /></a>
         <a href='https://www.linkedin.com/in/mattsantamaria123'><img  className='linkedin'  src='http://www.iconsdb.com/icons/preview/white/linkedin-xxl.png'  /></a>

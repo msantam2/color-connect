@@ -1,4 +1,4 @@
-import Game from '../components/tile';
+import Game from '../components/game';
 import { GameConstants, GameActions } from '../actions/game_actions';
 import { connect } from 'react-redux';
 
@@ -8,4 +8,10 @@ const mapStateToProps = state => ({
   boardReset: state.boardReset
 });
 
-export default connect(mapStateToProps)(Game); 
+const mapDispatchToProps = dispatch => ({
+  updateCurrentColor: color => dispatch(GameActions.updateCurrentColor(color)),
+  updatePreviousTile: tile => dispatch(GameActions.updatePreviousTile(tile)),
+  toggleBoardReset: () => dispatch(GameActions.toggleBoardReset())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

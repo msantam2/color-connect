@@ -1,4 +1,4 @@
-import Tile from '../components/tile';
+import Game from '../components/game';
 import { GameConstants, GameActions } from '../actions/game_actions';
 import { connect } from 'react-redux';
 
@@ -14,4 +14,4 @@ const mapDispatchToProps = dispatch => ({
   toggleBoardReset: () => dispatch(GameActions.toggleBoardReset())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tile); 
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
