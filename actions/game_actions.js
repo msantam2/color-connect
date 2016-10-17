@@ -1,7 +1,9 @@
 export const GameConstants = {
   UPDATE_CURRENT_COLOR: 'UPDATE_CURRENT_COLOR',
   UPDATE_PREVIOUS_TILE: 'UPDATE_PREVIOUS_TILE',
-  TOGGLE_BOARD_RESET: 'TOGGLE_BOARD_RESET'
+  TOGGLE_BOARD_RESET: 'TOGGLE_BOARD_RESET',
+  INCREMENT_LEVEL: 'INCREMENT_LEVEL',
+  CREATE_BOARD: 'CREATE_BOARD'
 };
 
 export const GameActions = {
@@ -17,5 +19,14 @@ export const GameActions = {
 
   toggleBoardReset: () => ({
     type: GameConstants.TOGGLE_BOARD_RESET
+  }),
+
+  incrementLevel: () => ({
+    type: GameConstants.INCREMENT_LEVEL
+  }),
+
+  createBoard: level => ({
+    type: GameConstants.CREATE_BOARD,
+    level
   })
 };

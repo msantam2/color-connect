@@ -7,21 +7,23 @@ import ModalStyle from '../stylesheets/modal_style';
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    const board = new ColorConnect.Board(1);
-    this.state = {board: board,
-                  modalOpen: false};
+    // const board = new ColorConnect.Board(1);
+    this.state = {modalOpen: false};
     this.resetLevel = this.resetLevel.bind(this);
+    this.nextLevel = this.nextLevel.bind(this);
     this._handleAboutClick = this._handleAboutClick.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
     this.onModalOpen = this.onModalOpen.bind(this);
   }
 
   resetLevel() {
-    const newBoard = new ColorConnect.Board(this.state.board.level);
-    this.setState({
-      board: newBoard,
-      // boardReset: true
-    });
+    this.props.toggleBoardReset(); // i.e. false to true
+  }
+
+  nextLevel() {
+    this.props.incrementLevel();
+    const newBoard = new ColorConnect.Board(this.props.level);
+    this.props.createBoard(newBoard);
   }
 
   _handleAboutClick() {
@@ -43,14 +45,14 @@ class Game extends React.Component {
 
   render() {
     let modal;
-    if (this.state.board.won()) {
+    if (this.props.board.won()) {
       const text = "You won!";
       modal =
         <div className='modal-screen'>
           <div className='modal-content'>
             <p className='you-won-text'>{text}</p>
             <button className='play-again-btn' onClick={this.resetLevel}>Play Again</button>
-            <button className='next-level-btn'>Next Level</button>
+            <button className='next-level-btn' onClick={this.nextLevel}>Next Level</button>
           </div>
         </div>;
     }
@@ -60,10 +62,10 @@ class Game extends React.Component {
         {modal}
         <div className='game-header'>
           <button className='about-btn' onClick={this._handleAboutClick}>About</button>
-          <h1 className='level-header'>{`Level ${this.state.board.level}`}</h1>
+          <h1 className='level-header'>{`Level ${this.props.board.level}`}</h1>
           <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
         </div>
-        <Board board={this.state.board}
+        <Board board={this.props.board}
                currentColor={this.props.currentColor}
                updateCurrentColor={this.props.updateCurrentColor}
                previousTile={this.props.previousTile}

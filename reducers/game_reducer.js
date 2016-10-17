@@ -1,5 +1,6 @@
 import { GameConstants } from '../actions/game_actions';
 import merge from 'lodash/merge';
+import * as ColorConnect from '../lib/color_connect';
 
 const GameReducer = (state, action) => {
   let nextState;
@@ -19,6 +20,17 @@ const GameReducer = (state, action) => {
       const boardReset = !state['boardReset'];
       return merge({}, state, {
         boardReset
+      });
+
+    case (GameConstants.INCREMENT_LEVEL):
+      const level = state.level += 1;
+      return merge({}, state, {
+        level
+      });
+    case (GameConstants.CREATE_BOARD):
+      const board = new ColorConnect.Board(state.level);
+      return merge({}, state, {
+        board
       });
     default:
       return state;
