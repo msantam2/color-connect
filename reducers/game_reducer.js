@@ -1,6 +1,6 @@
 import { GameConstants } from '../actions/game_actions';
 import merge from 'lodash/merge';
-import * as ColorConnect from '../lib/color_connect';
+import ColorConnectBoard from '../lib/color_connect_board';
 
 const GameReducer = (state, action) => {
   let nextState;
@@ -28,7 +28,7 @@ const GameReducer = (state, action) => {
         level
       });
     case (GameConstants.CREATE_BOARD):
-      const board = new ColorConnect.Board(state.level);
+      const board = new ColorConnectBoard(state.level);
       return merge({}, state, {
         board
       });

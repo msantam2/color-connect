@@ -1,5 +1,5 @@
 import React from 'react';
-import * as ColorConnect from '../lib/color_connect';
+import ColorConnectBoard from '../lib/color_connect_board';
 import Board from './board';
 import Modal from 'react-modal';
 import ModalStyle from '../stylesheets/modal_style';
@@ -22,7 +22,7 @@ class Game extends React.Component {
 
   nextLevel() {
     this.props.incrementLevel();
-    const newBoard = new ColorConnect.Board(this.props.level);
+    const newBoard = new ColorConnectBoard(this.props.level);
     this.props.createBoard(newBoard);
   }
 

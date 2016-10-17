@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from '../components/root';
 import configureStore from '../store/store';
-import * as ColorConnect from '../lib/color_connect';
+import ColorConnectBoard from '../lib/color_connect_board';
 import Modal from 'react-modal';
 
 document.addEventListener('DOMContentLoaded', () => {
   Modal.setAppElement(document.body);
-  const board = new ColorConnect.Board(1);
+  const board = new ColorConnectBoard(1);
   const preloadedState = {
     board: board,
     level: 1,
