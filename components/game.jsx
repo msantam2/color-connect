@@ -10,22 +10,23 @@ class Game extends React.Component {
     this.state = {modalOpen: false};
     this.resetLevel = this.resetLevel.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
+    this.startGameOver = this.startGameOver.bind(this);
     this._handleAboutClick = this._handleAboutClick.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
     this.onModalOpen = this.onModalOpen.bind(this);
   }
 
   resetLevel() {
-    const newBoard = new ColorConnectBoard(this.props.level);
-    this.props.createBoard(newBoard);
-    this.props.toggleBoardReset(); // i.e. false to true
+    this.props.createBoard(this.props.level);
   }
 
   nextLevel() {
+    this.props.createBoard(this.props.level + 1);
     this.props.incrementLevel();
-    const newBoard = new ColorConnectBoard(this.props.level);
-    this.props.createBoard(newBoard);
-    this.props.toggleBoardReset();
+  }
+
+  startGameOver() {
+    this.props.createBoard(1);
   }
 
   _handleAboutClick() {
@@ -47,8 +48,19 @@ class Game extends React.Component {
 
   render() {
     let modal;
-    if (this.props.board.won()) {
-      const text = "You won!";
+    let text;
+    if (this.props.board.won() && this.props.level === 3) {
+      text = "Wow! You Beat All Levels!";
+      modal =
+        <div className='modal-screen'>
+          <div className='modal-content'>
+            <p className='you-won-text'>{text}</p>
+            <button className='start-game-over-btn' onClick={this.startGameOver}>Start Over</button>
+            <button className='github-link'><a href='https://github.com/msantam2/color-connect'>Check Out Code on GitHub!</a></button>
+          </div>
+        </div>;
+    } else if (this.props.board.won()) {
+      text = "You Beat This Level!";
       modal =
         <div className='modal-screen'>
           <div className='modal-content'>
@@ -74,8 +86,8 @@ class Game extends React.Component {
                updateCurrentColor={this.props.updateCurrentColor}
                previousTile={this.props.previousTile}
                updatePreviousTile={this.props.updatePreviousTile}
-               boardReset={this.props.boardReset}
-               toggleBoardReset={this.props.toggleBoardReset} />
+               updatePathSegmentColor={this.props.updatePathSegmentColor}
+               clearPath={this.props.clearPath} />
 
         <a href='https://github.com/msantam2/color-connect'><img  className='github' src='http://www.iconsdb.com/icons/preview/white/github-10-xxl.png ' /></a>
         <a href='https://www.linkedin.com/in/mattsantamaria123'><img  className='linkedin'  src='http://www.iconsdb.com/icons/preview/white/linkedin-xxl.png'  /></a>

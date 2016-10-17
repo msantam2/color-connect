@@ -16,22 +16,33 @@ const GameReducer = (state, action) => {
       return merge({}, state, {
         previousTile
       });
-    case (GameConstants.TOGGLE_BOARD_RESET):
-      const boardReset = !state['boardReset'];
-      return merge({}, state, {
-        boardReset
-      });
-
     case (GameConstants.INCREMENT_LEVEL):
       const level = state.level += 1;
       return merge({}, state, {
         level
       });
     case (GameConstants.CREATE_BOARD):
-      const board = new ColorConnectBoard(state.level);
+      const board = new ColorConnectBoard(action.level);
       return merge({}, state, {
         board
       });
+    case (GameConstants.UPDATE_PATH_SEGMENT_COLOR):
+      nextState = merge({}, state); // board has grid of tiles
+      let [x, y] = action.pos;
+      nextState.board.grid[x][y].pathSegmentColor = action.color;
+      return nextState;
+    case (GameConstants.CLEAR_PATH):
+      nextState = merge({}, state);
+      for (let i = 0; i < nextState.board.grid.length; i++) {
+        let row = nextState.board.grid[i];
+        for (let j = 0; j < row.length; j++) {
+          let tile = nextState.board.grid[i][j];
+          if (tile.pathSegmentColor === action.color) {
+            tile.pathSegmentColor = null; 
+          }
+        }
+      }
+      return nextState;
     default:
       return state;
   }

@@ -1,9 +1,10 @@
 export const GameConstants = {
   UPDATE_CURRENT_COLOR: 'UPDATE_CURRENT_COLOR',
   UPDATE_PREVIOUS_TILE: 'UPDATE_PREVIOUS_TILE',
-  TOGGLE_BOARD_RESET: 'TOGGLE_BOARD_RESET',
   INCREMENT_LEVEL: 'INCREMENT_LEVEL',
-  CREATE_BOARD: 'CREATE_BOARD'
+  CREATE_BOARD: 'CREATE_BOARD',
+  UPDATE_PATH_SEGMENT_COLOR: 'UPDATE_PATH_SEGMENT_COLOR',
+  CLEAR_PATH: 'CLEAR_PATH'
 };
 
 export const GameActions = {
@@ -17,10 +18,6 @@ export const GameActions = {
     tile
   }),
 
-  toggleBoardReset: () => ({
-    type: GameConstants.TOGGLE_BOARD_RESET
-  }),
-
   incrementLevel: () => ({
     type: GameConstants.INCREMENT_LEVEL
   }),
@@ -28,5 +25,16 @@ export const GameActions = {
   createBoard: level => ({
     type: GameConstants.CREATE_BOARD,
     level
+  }),
+
+  updatePathSegmentColor: (color, pos) => ({
+    type: GameConstants.UPDATE_PATH_SEGMENT_COLOR,
+    color: color,
+    pos: pos
+  }),
+
+  clearPath: color => ({
+    type: GameConstants.CLEAR_PATH,
+    color
   })
 };

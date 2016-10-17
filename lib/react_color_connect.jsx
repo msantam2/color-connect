@@ -7,13 +7,12 @@ import Modal from 'react-modal';
 
 document.addEventListener('DOMContentLoaded', () => {
   Modal.setAppElement(document.body);
-  const board = new ColorConnectBoard(2);
+  const board = new ColorConnectBoard(1);
   const preloadedState = {
     board: board,
-    level: 2,
+    level: 1,
     currentColor: null,
-    previousTile: null,
-    boardReset: false
+    previousTile: null
   };
   const store = configureStore(preloadedState);
   const root = document.getElementById('root');

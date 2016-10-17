@@ -36,8 +36,8 @@ class Board extends React.Component {
               updateCurrentColor={this.props.updateCurrentColor}
               previousTile={this.props.previousTile}
               updatePreviousTile={this.props.updatePreviousTile}
-              boardReset={this.props.boardReset}
-              toggleBoardReset={this.props.toggleBoardReset} />
+              updatePathSegmentColor={this.props.updatePathSegmentColor}
+              clearPath={this.props.clearPath} />
       );
     });
   }

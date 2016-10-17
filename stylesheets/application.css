@@ -9,6 +9,11 @@ button {
   outline: none;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 button:hover {
   -webkit-filter: brightness(85%);
   cursor: pointer;
@@ -57,7 +62,7 @@ button:active {
 }
 
 .colored-dot {
-  cursor: pointer; 
+  cursor: pointer;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -109,7 +114,7 @@ button:active {
   border: 1px solid black;
   font-size: 20px;
   width: 300px;
-  height: 138px;
+  height: 230px;
   top: 50%;
   left: 50%;
   text-align: center;
@@ -120,7 +125,7 @@ button:active {
   font-family: 'Bungee', cursive;
 }
 
-.play-again-btn, .next-level-btn {
+.play-again-btn, .next-level-btn, .start-game-over-btn, .github-link {
   cursor: pointer;
   padding: 15px;
   background: white;
