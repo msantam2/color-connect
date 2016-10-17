@@ -7,7 +7,6 @@ import ModalStyle from '../stylesheets/modal_style';
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    // const board = new ColorConnect.Board(1);
     this.state = {modalOpen: false};
     this.resetLevel = this.resetLevel.bind(this);
     this.nextLevel = this.nextLevel.bind(this);
@@ -17,6 +16,8 @@ class Game extends React.Component {
   }
 
   resetLevel() {
+    const newBoard = new ColorConnectBoard(this.props.level);
+    this.props.createBoard(newBoard);
     this.props.toggleBoardReset(); // i.e. false to true
   }
 
@@ -24,6 +25,7 @@ class Game extends React.Component {
     this.props.incrementLevel();
     const newBoard = new ColorConnectBoard(this.props.level);
     this.props.createBoard(newBoard);
+    this.props.toggleBoardReset();
   }
 
   _handleAboutClick() {
@@ -57,12 +59,14 @@ class Game extends React.Component {
         </div>;
     }
 
+    let dimensions = `${this.props.board.gridSize()}x${this.props.board.gridSize()}`;
+
     return (
       <div className='game-container'>
         {modal}
         <div className='game-header'>
           <button className='about-btn' onClick={this._handleAboutClick}>About</button>
-          <h1 className='level-header'>{`Level ${this.props.board.level}`}</h1>
+          <h1 className='level-header'>{`Level ${this.props.board.level} (${dimensions})`}</h1>
           <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
         </div>
         <Board board={this.props.board}
