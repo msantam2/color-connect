@@ -1,7 +1,6 @@
 export const GameConstants = {
   UPDATE_CURRENT_COLOR: 'UPDATE_CURRENT_COLOR',
   UPDATE_PREVIOUS_TILE: 'UPDATE_PREVIOUS_TILE',
-  INCREMENT_LEVEL: 'INCREMENT_LEVEL',
   CREATE_BOARD: 'CREATE_BOARD',
   UPDATE_PATH_SEGMENT_COLOR: 'UPDATE_PATH_SEGMENT_COLOR',
   CLEAR_PATH: 'CLEAR_PATH',
@@ -17,10 +16,6 @@ export const GameActions = {
   updatePreviousTile: tile => ({
     type: GameConstants.UPDATE_PREVIOUS_TILE,
     tile
-  }),
-
-  incrementLevel: () => ({
-    type: GameConstants.INCREMENT_LEVEL
   }),
 
   createBoard: level => ({

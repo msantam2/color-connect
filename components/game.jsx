@@ -17,12 +17,11 @@ class Game extends React.Component {
   }
 
   resetLevel() {
-    this.props.createBoard(this.props.level);
+    this.props.createBoard(this.props.board.level);
   }
 
   nextLevel() {
-    this.props.createBoard(this.props.level + 1);
-    this.props.incrementLevel();
+    this.props.createBoard(this.props.board.level + 1);
   }
 
   startGameOver() {
@@ -53,7 +52,7 @@ class Game extends React.Component {
 
     let pathStartPositions = this.props.pathStartPositions;
     if (this.props.board.won(pathStartPositions)) {
-      if (this.props.level === 3) {
+      if (this.props.board.level === 3) {
         text = "Wow! You Beat All Levels!";
         buttons = <div>
                     <button className='start-game-over-btn' onClick={this.startGameOver}>Start Over</button>

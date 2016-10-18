@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const board = new ColorConnectBoard(1);
   const preloadedState = {
     board: board,
-    level: 1,
     currentColor: null,
     previousTile: null,
     pathStartPositions: {}

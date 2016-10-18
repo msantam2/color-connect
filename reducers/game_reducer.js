@@ -16,11 +16,6 @@ const GameReducer = (state, action) => {
       return merge({}, state, {
         previousTile
       });
-    case (GameConstants.INCREMENT_LEVEL):
-      const level = state.level += 1;
-      return merge({}, state, {
-        level
-      });
     case (GameConstants.CREATE_BOARD):
       const board = new ColorConnectBoard(action.level);
       return merge({}, state, {
