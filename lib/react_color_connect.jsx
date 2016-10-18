@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     board: board,
     level: 1,
     currentColor: null,
-    previousTile: null
+    previousTile: null,
+    pathStartPositions: {}
   };
   const store = configureStore(preloadedState);
   const root = document.getElementById('root');

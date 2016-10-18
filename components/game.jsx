@@ -49,24 +49,28 @@ class Game extends React.Component {
   render() {
     let modal;
     let text;
-    if (this.props.board.won() && this.props.level === 3) {
-      text = "Wow! You Beat All Levels!";
+    let buttons;
+
+    let pathStartPositions = this.props.pathStartPositions;
+    if (this.props.board.won(pathStartPositions)) {
+      if (this.props.level === 3) {
+        text = "Wow! You Beat All Levels!";
+        buttons = <div>
+                    <button className='start-game-over-btn' onClick={this.startGameOver}>Start Over</button>
+                    <button className='github-link'><a href='https://github.com/msantam2/color-connect'>Check Out Code on GitHub!</a></button>
+                  </div>;
+      } else {
+        text = "You Beat This Level!";
+        buttons = <div>
+                    <button className='play-again-btn' onClick={this.resetLevel}>Play Again</button>
+                    <button className='next-level-btn' onClick={this.nextLevel}>Next Level</button>
+                  </div>;
+      }
       modal =
         <div className='modal-screen'>
           <div className='modal-content'>
             <p className='you-won-text'>{text}</p>
-            <button className='start-game-over-btn' onClick={this.startGameOver}>Start Over</button>
-            <button className='github-link'><a href='https://github.com/msantam2/color-connect'>Check Out Code on GitHub!</a></button>
-          </div>
-        </div>;
-    } else if (this.props.board.won()) {
-      text = "You Beat This Level!";
-      modal =
-        <div className='modal-screen'>
-          <div className='modal-content'>
-            <p className='you-won-text'>{text}</p>
-            <button className='play-again-btn' onClick={this.resetLevel}>Play Again</button>
-            <button className='next-level-btn' onClick={this.nextLevel}>Next Level</button>
+            {buttons}
           </div>
         </div>;
     }
@@ -82,12 +86,15 @@ class Game extends React.Component {
           <button className='reset-btn' onClick={this.resetLevel}>Reset</button>
         </div>
         <Board board={this.props.board}
+               validPathColors={this.props.board.validPathColors(this.props.pathStartPositions)}
                currentColor={this.props.currentColor}
                updateCurrentColor={this.props.updateCurrentColor}
                previousTile={this.props.previousTile}
                updatePreviousTile={this.props.updatePreviousTile}
                updatePathSegmentColor={this.props.updatePathSegmentColor}
-               clearPath={this.props.clearPath} />
+               clearPath={this.props.clearPath}
+               pathStartPositions={this.props.pathStartPositions}
+               updatePathStartPosition={this.props.updatePathStartPosition} />
 
         <a href='https://github.com/msantam2/color-connect'><img  className='github' src='http://www.iconsdb.com/icons/preview/white/github-10-xxl.png ' /></a>
         <a href='https://www.linkedin.com/in/mattsantamaria123'><img  className='linkedin'  src='http://www.iconsdb.com/icons/preview/white/linkedin-xxl.png'  /></a>

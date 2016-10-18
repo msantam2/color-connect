@@ -4,7 +4,8 @@ export const GameConstants = {
   INCREMENT_LEVEL: 'INCREMENT_LEVEL',
   CREATE_BOARD: 'CREATE_BOARD',
   UPDATE_PATH_SEGMENT_COLOR: 'UPDATE_PATH_SEGMENT_COLOR',
-  CLEAR_PATH: 'CLEAR_PATH'
+  CLEAR_PATH: 'CLEAR_PATH',
+  UPDATE_PATH_START_POSITION: 'UPDATE_PATH_START_POSITION'
 };
 
 export const GameActions = {
@@ -36,5 +37,11 @@ export const GameActions = {
   clearPath: color => ({
     type: GameConstants.CLEAR_PATH,
     color
+  }),
+
+  updatePathStartPosition: (color, pos) => ({
+    type: GameConstants.UPDATE_PATH_START_POSITION,
+    color: color,
+    pos: pos
   })
 };

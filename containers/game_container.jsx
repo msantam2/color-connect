@@ -6,7 +6,8 @@ const mapStateToProps = state => ({
   board: state.board,
   level: state.level,
   currentColor: state.currentColor,
-  previousTile: state.previousTile
+  previousTile: state.previousTile,
+  pathStartPositions: state.pathStartPositions
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -15,7 +16,8 @@ const mapDispatchToProps = dispatch => ({
   updatePathSegmentColor: (color, pos) => dispatch(GameActions.updatePathSegmentColor(color, pos)),
   incrementLevel: () => dispatch(GameActions.incrementLevel()),
   createBoard: level => dispatch(GameActions.createBoard(level)),
-  clearPath: color => dispatch(GameActions.clearPath(color))
+  clearPath: color => dispatch(GameActions.clearPath(color)),
+  updatePathStartPosition: (color, pos) => dispatch(GameActions.updatePathStartPosition(color, pos))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

@@ -38,10 +38,14 @@ const GameReducer = (state, action) => {
         for (let j = 0; j < row.length; j++) {
           let tile = nextState.board.grid[i][j];
           if (tile.pathSegmentColor === action.color) {
-            tile.pathSegmentColor = null; 
+            tile.pathSegmentColor = null;
           }
         }
       }
+      return nextState;
+    case (GameConstants.UPDATE_PATH_START_POSITION):
+      nextState = merge({}, state);
+      nextState['pathStartPositions'][action.color] = action.pos;
       return nextState;
     default:
       return state;
