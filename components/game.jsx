@@ -100,13 +100,18 @@ class Game extends React.Component {
 
           <button onClick={this.onModalClose} className='about-close-btn'>&#10006;</button>
           <p className='about-info'>
-            Color Connect is a game that is all about connecting the dots! Colored dots, that is. You are provided a grid that contains several different colors scattered within it (2 dots of each color). The goal is to draw a line connecting dots of the same color. Sound easy? Make sure to stick to the following rules:
+            Welcome! You are provided a board that contains several different colors scattered within it (2 dots of each color). The goal is to draw a path connecting dots of the same color. Sound easy? Make sure to stick to the following rules:
             <br></br>
             <br></br>
-            1. No lines may overlap
+            1. No paths may overlap
             <br></br>
             <br></br>
-            2. Every space in the grid must be filled (either by a colored dot or a segment of a line)
+            2. Every space on the board must be filled (either by a colored dot or a segment of a path)
+            <br></br>
+            <br></br>
+            To undo moves, you can click on a colored dot, which clears the current path for that color from the board.
+            <br></br>
+            Also, you can click the 'Reset' button to the top-right of the board, which clears the whole board
             <br></br>
             <br></br>
             Good luck!

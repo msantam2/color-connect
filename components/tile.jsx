@@ -19,9 +19,7 @@ class Tile extends React.Component {
     let pathSegmentColor = this.props.tile.pathSegmentColor;
     let pos = this.props.tile.pos;
 
-    if (pathSegmentColor) {
-      this.props.updatePathSegmentColor(null, pos);
-    } else if (this.props.previousTile && this.props.tile.isNeighbor(this.props.previousTile)) {
+    if (this.props.tile.isNeighbor(this.props.previousTile)) {
       this.props.updatePathSegmentColor(this.props.currentColor, pos);
       this.props.updatePreviousTile(this.props.tile);
     }

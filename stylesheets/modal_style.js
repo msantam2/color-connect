@@ -21,7 +21,7 @@ const ModalStyle = {
     borderRadius    : '8px',
     width           : '50%',
     margin          : '0 auto',
-    height          : '350px',
+    height          : '400px',
     fontFamily      : '\'Bungee\', cursive',
     fontSize        : '14px'
   }
