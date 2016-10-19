@@ -8,8 +8,8 @@ Color Connect is a game built with JS/React/Redux that is all about connecting t
 - No paths may overlap
 - Every space on the board must be filled (either by a colored dot or a segment of a path)
 
-<img src="https://github.com/msantam2/color-connect/blob/master/images/blank_board.png" width="400" height="400" />
-<img src="https://github.com/msantam2/color-connect/blob/master/images/gameplay.gif" width="400" height="400" />
+<img src="https://github.com/msantam2/color-connect/blob/master/images/blank_board.png" width="400" height="500" />
+<img src="https://github.com/msantam2/color-connect/blob/master/images/gameplay.gif" width="400" height="500" />
 
 -----------
 
