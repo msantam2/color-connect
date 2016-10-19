@@ -15,28 +15,26 @@ Color Connect is a game built with JS/React/Redux that is all about connecting t
 
 ## Architecture & Technologies (React/Redux)
 
-Color Connect is a single-page, frontend game written in JavaScript in conjunction with React and Redux. This structure leads to a clean separation of concerns:
+Color Connect is a single-page, frontend game built with vanilla JavaScript in conjunction with React/Redux. This structure leads to a clean separation of concerns:
 
 | vanilla JavaScript | React Components | Redux Store |
 | --------------     | --------------   | -------------- |
 | Game (Business) logic | Presentation logic | Global application state |
 
 The React component hierarchy is as follows:<br></br>
-Game > Board > Tile > PathSegment<br></br>
-
+Game > Board > Tile<br></br>
 This hierarchy, when working with Redux, allows for a simple-to-follow (and debug) uni-directional data flow that trickles down to the Tile component, where the majority of the user interaction is handled. This makes sense: when boiled down, the user is primarily interfacing with the tiles themselves.
 
-The application's state is abstracted out and kept in the Redux store. This results in a 'single source of truth', minimizing local state within components and allowing the app to be maintainable and easy to understand. The global store contains the following key-value pairs:
+The application state is abstracted out and kept in the Redux store. This results in a 'single source of truth', minimizing local state within components and allowing the app to be maintainable and easy to understand. The global store contains the following data:
 ```js
 const preloadedState = {
   board: board,
-  level: 1,
   currentColor: null,
   previousTile: null,
   pathStartPositions: {}
 };
 ```
-All information about the board (which contains the tiles and their corresponding colors) is nicely packaged in this store and is made available to the React components for presentational purposes.
+All information about the board (including the level and tile colors) is nicely packaged in this store and is made available to the React components for presentational purposes.
 
 ---------
 
@@ -44,7 +42,7 @@ All information about the board (which contains the tiles and their correspondin
 
 ### Creating Paths
 
-Each Tile component's event handlers dispatch actions to update the Redux store:
+Each Tile component's event handlers dispatch actions to update the appropriate properties Redux store:
 ```js
 handleDotClick(dotColor) {
   this.props.updateCurrentColor(dotColor);
@@ -70,7 +68,7 @@ handlePathClick() {
 
 ### Winning Condition
 
-Upon each re-render of the React hierarchy, the game must be responsible for checking if the player has won. In order to achieve this, a recursive function is utilized that iterates through each color and checks the path from the starting dot tile to the ending dot tile.
+Upon each re-render of the React hierarchy, the game must be responsible for checking if the player has won. In order to achieve this, a recursive function is utilized in our game logic that iterates through each color and checks the path from the starting dot tile to the ending dot tile.
 
 ```js
 validPathCreated(startTile, endTile, visitedTiles = []) {
@@ -96,9 +94,7 @@ validPathCreated(startTile, endTile, visitedTiles = []) {
   return false;
 }
 ```
-validPathCreated calls a helper ```sameColoredNeighbors``` to gather the adjacent path tiles, and effectively subtracts the already ```visitedTiles``` to produce ```filteredNeighbors```. This way, when checking the validity of a path, an infinite loop is avoided that would be caused by a path checking adjacent tiles back and forth.
-
-If every colored pair is connected by a valid path, the player can give themselves a pat on the back because they have beat the level!
+validPathCreated calls the helper function ```sameColoredNeighbors``` to gather all adjacent path tile, and then removes the already ```visitedTiles``` to produce ```filteredNeighbors```. This way, when checking the validity of a path, an infinite loop is avoided that would be caused by checking adjacent tiles back and forth. Rather, we want to 'step through' the path from tile to tile, evaluating if we have reached the end at each step.
 
 ---------
 
@@ -110,4 +106,4 @@ In the near future I plan to enhance the UX by allowing the user to simply click
 
 ### Path Segments
 
-I plan to dynamically render React tile sub-components that display the direction of a path more clearly (e.g. vertical lines, horizontal lines, and bent-lines)
+I plan to dynamically render Tile components that display the direction of a path more clearly (e.g. vertical lines, horizontal lines, and bent-lines)
