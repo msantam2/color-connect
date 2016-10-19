@@ -8,8 +8,8 @@ Color Connect is a game built with JS/React/Redux that is all about connecting t
 - No paths may overlap
 - Every space on the board must be filled (either by a colored dot or a segment of a path)
 
-<img src="https://github.com/msantam2/color-connect/blob/master/images/blank_board.png" width="430" height="430" />
-<img src="https://github.com/msantam2/color-connect/blob/master/images/gameplay.gif" width="400" height="430" />
+<img src="https://github.com/msantam2/color-connect/blob/master/images/blank_board.png" width="440" height="440" />
+<img src="https://github.com/msantam2/color-connect/blob/master/images/gameplay.gif" width="400" height="440" />
 
 -----------
 
@@ -42,7 +42,7 @@ All information about the board (including the level and tile colors) is nicely 
 
 ### Creating Paths
 
-Each Tile component's event handlers dispatch actions to update the appropriate properties Redux store:
+Each Tile component's event handlers dispatch actions to update the appropriate properties in the Redux store:
 ```js
 handleDotClick(dotColor) {
   this.props.updateCurrentColor(dotColor);
@@ -94,7 +94,7 @@ validPathCreated(startTile, endTile, visitedTiles = []) {
   return false;
 }
 ```
-validPathCreated calls the helper function ```sameColoredNeighbors``` to gather all adjacent path tile, and then removes the already ```visitedTiles``` to produce ```filteredNeighbors```. This way, when checking the validity of a path, an infinite loop is avoided that would be caused by checking adjacent tiles back and forth. Rather, we want to 'step through' the path from tile to tile, evaluating if we have reached the end at each step.
+validPathCreated calls the helper function ```sameColoredNeighbors``` to gather all adjacent path tiles, and then removes the already ```visitedTiles``` to produce ```filteredNeighbors```. This way, when checking the validity of a path, an infinite loop is avoided that would be caused by checking adjacent tiles back and forth. Rather, we want to 'step through' the path from tile to tile, evaluating if we have reached the end at each step.
 
 ---------
 
