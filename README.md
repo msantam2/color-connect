@@ -94,7 +94,7 @@ validPathCreated(startTile, endTile, visitedTiles = []) {
   return false;
 }
 ```
-validPathCreated calls the helper function ```sameColoredNeighbors``` to gather all adjacent path tiles, and then removes the already ```visitedTiles``` to produce ```filteredNeighbors```. This way, when checking the validity of a path, an infinite loop is avoided that would be caused by checking adjacent tiles back and forth. Rather, we want to 'step through' the path from tile to tile, evaluating if we have reached the end at each step.
+validPathCreated calls the helper function ```sameColoredNeighbors``` to gather all adjacent path tiles, and then removes the already ```visitedTiles``` to produce ```filteredNeighbors```. This way, when checking the validity of a path, an infinite loop is avoided that would be caused by checking adjacent tiles back and forth. We want to 'step through' the path from tile to tile, evaluating if we have reached the end at each step.
 
 ---------
 
