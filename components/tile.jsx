@@ -50,10 +50,13 @@ class Tile extends React.Component {
 
       tileContent =  <div className='colored-dot'
                           style={coloredDotStyle}
-                          onClick={this.handleDotClick.bind(null, dotColor)}>
+                          onMouseDown={this.handleDotClick.bind(null, dotColor)}>
                      </div>;
     } else {
-      tileContent = <div className='path-tile' onClick={this.handlePathClick}>{this.renderPathSegment()}</div>;
+      tileContent = <div className='path-tile'
+                         onMouseEnter={this.handlePathClick}>
+                         {this.renderPathSegment()}
+                    </div>;
     }
 
     return (
