@@ -116,6 +116,9 @@ class Game extends React.Component {
             2. Every space on the board must be filled (either by a colored dot or a segment of a path)
             <br></br>
             <br></br>
+            To begin drawing a new path, click and drag from a colored dot onto surrounding tiles, or from the end of a path already in progress.
+            <br></br>
+            <br></br>
             To undo moves, you can click on a colored dot, which clears the current path for that color from the board.
             <br></br>
             Also, you can click the 'Reset' button to the top-right of the board, which clears the whole board
