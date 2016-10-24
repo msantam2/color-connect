@@ -15,16 +15,19 @@ class Tile extends React.Component {
     this.props.clearPath(dotColor);
   }
 
-  handlePathClick() {
-    let pathSegmentColor = this.props.tile.pathSegmentColor;
-    let pos = this.props.tile.pos;
+  handlePathClick(e) {
+    // e.buttons === 1 simply checks that the mouse is pressed down
+    if (e.buttons === 1) {
+      let pathSegmentColor = this.props.tile.pathSegmentColor;
+      let pos = this.props.tile.pos;
 
-    if (this.props.tile.isNeighbor(this.props.previousTile)) {
-      if (this.props.previousTile.dotColor) {
-        this.props.updatePathStartPosition(this.props.currentColor, this.props.tile.pos);
+      if (this.props.tile.isNeighbor(this.props.previousTile)) {
+        if (this.props.previousTile.dotColor) {
+          this.props.updatePathStartPosition(this.props.currentColor, this.props.tile.pos);
+        }
+        this.props.updatePathSegmentColor(this.props.currentColor, pos);
+        this.props.updatePreviousTile(this.props.tile);
       }
-      this.props.updatePathSegmentColor(this.props.currentColor, pos);
-      this.props.updatePreviousTile(this.props.tile);
     }
   }
 
@@ -54,7 +57,7 @@ class Tile extends React.Component {
                      </div>;
     } else {
       tileContent = <div className='path-tile'
-                         onMouseEnter={this.handlePathClick}>
+                         onMouseOver={this.handlePathClick}>
                          {this.renderPathSegment()}
                     </div>;
     }

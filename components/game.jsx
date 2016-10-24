@@ -17,6 +17,7 @@ class Game extends React.Component {
   }
 
   resetLevel() {
+    this.props.updateCurrentColor(null); // may not need - check later!
     this.props.createBoard(this.props.board.level);
   }
 
