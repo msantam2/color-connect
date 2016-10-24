@@ -73,7 +73,7 @@ handleEmptyTile(e) {
 }
 ```
 
-The statement ```e.buttons === 1``` is a simple and elegant way to check if the mouse is currently being pressed down while the path is being dragged on the board. If the mouse is being pressed, ```e.buttons``` has a value of 1; if not, ```e.buttons``` has a value of 0.
+The statement ```e.buttons === 1``` (```e``` being the event object) is a simple and elegant way to check if the mouse is currently being pressed down while the path is being dragged on the board. If the mouse is being pressed, ```e.buttons``` has a value of 1; if not, ```e.buttons``` has a value of 0.
 
 This implementation results in a faster and much more enjoyable experience for the player.
 
