@@ -22,10 +22,12 @@ Color Connect is a single-page, frontend game built with vanilla JavaScript in c
 | Game (Business) logic | Presentation logic | Global application state |
 
 The React component hierarchy is as follows:<br></br>
+
 Game > Board > Tile<br></br>
+
 This hierarchy, when working with Redux, allows for a simple-to-follow (and debug) uni-directional data flow that trickles down to the Tile component, where the majority of the user interaction is handled. This makes sense: when boiled down, the user is primarily interfacing with the tiles themselves.
 
-The application state is abstracted out and kept in the Redux store. This results in a 'single source of truth', minimizing local state within components and allowing the app to be maintainable and easy to understand. The global store contains the following data:
+The application state is abstracted out and kept in the Redux store. This results in a 'single source of truth', minimizing local state within components and allowing the app to be maintainable and easy to understand. The global store contains the following properties:
 ```js
 const preloadedState = {
   board: board,
@@ -38,35 +40,46 @@ All information about the board (including the level and tile colors) is nicely 
 
 ---------
 
-## Features
+## Features & Implementation Details
 
-### Creating Paths
+### Drawing Paths by Dragging (React Synthetic Events)
 
-Each Tile component's event handlers dispatch actions to update the appropriate properties in the Redux store:
+```onMouseDown``` and ```onMouseOver``` event listeners are bound to dot tiles and path segment tiles, as seen below in ```tileContent```. These event listeners are of type SyntheticEvent, React events that serve as wrappers for native web API event listeners. These listeners are added to the ```<div>``` element as attributes and create the functionality of clicking (```onMouseDown```) and dragging (```onMouseOver```) to create a new path.
+
+dot tile:
 ```js
-handleDotClick(dotColor) {
-  this.props.updateCurrentColor(dotColor);
-  this.props.updatePreviousTile(this.props.tile);
-  this.props.clearPath(dotColor);
-}
+tileContent =  <div className='colored-dot'
+                    style={coloredDotStyle}
+                    onMouseDown={this.handleColoredTile.bind(null, dotColor, true)}>
+               </div>;
 ```
+<br></br>
+<br></br>
+path segment tile:
+```js
+tileContent = <div className='path-tile'
+                   onMouseDown={this.handleColoredTile.bind(null, this.props.tile.pathSegmentColor, false)}
+                   onMouseOver={this.handleEmptyTile}>
+                   {this.renderPathSegment()}
+              </div>;
+```
+<br></br>
+<br></br>
+In order to ensure the user is both clicking AND dragging to create a path, we add a simple check in ```handleEmptyTile```:
 
 ```js
-handlePathClick() {
-  let pathSegmentColor = this.props.tile.pathSegmentColor;
-  let pos = this.props.tile.pos;
-
-  if (this.props.tile.isNeighbor(this.props.previousTile)) {
-    if (this.props.previousTile.dotColor) {
-      this.props.updatePathStartPosition(this.props.currentColor, this.props.tile.pos);
-    }
-    this.props.updatePathSegmentColor(this.props.currentColor, pos);
-    this.props.updatePreviousTile(this.props.tile);
+handleEmptyTile(e) {
+  if (e.buttons === 1) {
+    // event handler code
   }
 }
 ```
 
-### Winning Condition
+The statement ```e.buttons === 1``` is a simple and elegant way to check if the mouse is currently being pressed down while the path is being dragged on the board. If the mouse is being pressed, ```e.buttons``` has a value of 1; if not, ```e.buttons``` has a value of 0.
+
+This implementation results in a faster and much more enjoyable experience for the player.
+
+### Winning Condition (Recursion)
 
 Upon each re-render of the React hierarchy, the game must be responsible for checking if the player has won. In order to achieve this, a recursive function is utilized in our game logic that iterates through each color and checks the path from the starting dot tile to the ending dot tile.
 
@@ -99,10 +112,6 @@ validPathCreated calls the helper function ```sameColoredNeighbors``` to gather 
 ---------
 
 ## Future Directions for Color Connect
-
-### Dragging Paths
-
-In the near future I plan to enhance the UX by allowing the user to simply click-and-drag paths on the board.
 
 ### Path Segments
 
