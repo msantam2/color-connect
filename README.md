@@ -23,7 +23,7 @@ Color Connect is a single-page, frontend game built with vanilla JavaScript in c
 
 The React component hierarchy is as follows:
 
-Game > Board > Tile<br></br>
+Game > Board > Tile
 
 This hierarchy, when working with Redux, allows for a simple-to-follow (and debug) uni-directional data flow that trickles down to the Tile component, where the majority of the user interaction is handled. This makes sense: when boiled down, the user is primarily interfacing with the tiles themselves.
 
@@ -53,8 +53,7 @@ tileContent =  <div className='colored-dot'
                     onMouseDown={this.handleColoredTile.bind(null, dotColor, true)}>
                </div>;
 ```
-
-
+<br></br>
 path segment tile:
 ```js
 tileContent = <div className='path-tile'
@@ -63,8 +62,7 @@ tileContent = <div className='path-tile'
                    {this.renderPathSegment()}
               </div>;
 ```
-
-
+<br></br>
 In order to ensure the user is both clicking AND dragging to create a path, we add a simple check in ```handleEmptyTile```:
 
 ```js
