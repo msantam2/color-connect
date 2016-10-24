@@ -4,19 +4,23 @@ import PathSegment from './path_segment';
 class Tile extends React.Component {
   constructor(props) {
     super(props);
-    this.handleDotClick = this.handleDotClick.bind(this);
-    this.handlePathClick = this.handlePathClick.bind(this);
+    this.handleColoredTile = this.handleColoredTile.bind(this);
+    this.handleEmptyTile = this.handleEmptyTile.bind(this);
     this.renderPathSegment = this.renderPathSegment.bind(this);
   }
 
-  handleDotClick(dotColor) {
-    this.props.updateCurrentColor(dotColor);
+  handleColoredTile(tileColor, isDot) {
+    this.props.updateCurrentColor(tileColor);
     this.props.updatePreviousTile(this.props.tile);
-    this.props.clearPath(dotColor);
+
+    if (isDot) {
+      this.props.clearPath(tileColor);
+    }
   }
 
-  handlePathClick(e) {
+  handleEmptyTile(e) {
     // e.buttons === 1 simply checks that the mouse is pressed down
+    // i.e. creating the feeling of clicking and dragging a path
     if (e.buttons === 1) {
       let pathSegmentColor = this.props.tile.pathSegmentColor;
       let pos = this.props.tile.pos;
@@ -53,11 +57,12 @@ class Tile extends React.Component {
 
       tileContent =  <div className='colored-dot'
                           style={coloredDotStyle}
-                          onMouseDown={this.handleDotClick.bind(null, dotColor)}>
+                          onMouseDown={this.handleColoredTile.bind(null, dotColor, true)}>
                      </div>;
     } else {
       tileContent = <div className='path-tile'
-                         onMouseOver={this.handlePathClick}>
+                         onMouseDown={this.handleColoredTile.bind(null, this.props.tile.pathSegmentColor, false)}
+                         onMouseOver={this.handleEmptyTile}>
                          {this.renderPathSegment()}
                     </div>;
     }
