@@ -96,7 +96,7 @@ class Game extends React.Component {
                pathStartPositions={this.props.pathStartPositions}
                updatePathStartPosition={this.props.updatePathStartPosition} />
 
-        <a href='https://github.com/msantam2/color-connect'><img  className='github' src='http://www.iconsdb.com/icons/preview/white/github-10-xxl.png ' /></a>
+             <a href='https://github.com/msantam2/color-connect'><img  className='github' src='http://www.iconsdb.com/icons/preview/white/github-10-xxl.png ' /></a>
         <a href='https://www.linkedin.com/in/mattsantamaria123'><img  className='linkedin'  src='http://www.iconsdb.com/icons/preview/white/linkedin-xxl.png'  /></a>
 
         <Modal
